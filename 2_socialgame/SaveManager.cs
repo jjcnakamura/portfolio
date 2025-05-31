@@ -23,10 +23,6 @@ public class SaveManager : Singleton<SaveManager>
             return;
         }
         DontDestroyOnLoad(gameObject);
-
-        //UnityRoom—p
-        playerCsvPath = "Resources/PlayerSaveData.csv";
-        charaCsvPath = "Resources/CharaSaveData.csv";
     }
 
     /// <summary>

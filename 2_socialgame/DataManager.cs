@@ -60,6 +60,7 @@ public class DataManager : Singleton<DataManager>
 
     void Update()
     {
+        //セーブデータの削除フラグが立っている場合
         if (saveDataInitialize && File.Exists(saveDataDirectoryPass + playerSaveDataPass) && File.Exists(saveDataDirectoryPass + charaSaveDataPass))
         {
             SaveManager.Instance.PlayerDataInitialize();
@@ -75,19 +76,16 @@ public class DataManager : Singleton<DataManager>
     //データのロードを開始する　他のクラスからも呼び出せる
     public void DataLoad()
     {
-        /*
         //ビルドした実行データの場合はファイルのパスを変更
 #if !UNITY_EDITOR
         playerSaveDataPass = "PlayerSaveData.csv";
         charaSaveDataPass = "CharaSaveData.csv";
         SaveManager.Instance.FilePassChange();
 #endif
-        */
 
         //データをロード
         GameDataLoad();
 
-        /*
         //セーブデータがない場合は新たに生成
         if (Directory.Exists(saveDataDirectoryPass) && !File.Exists(saveDataDirectoryPass + playerSaveDataPass) ||
             Directory.Exists(saveDataDirectoryPass) && !File.Exists(saveDataDirectoryPass + charaSaveDataPass))
@@ -104,10 +102,6 @@ public class DataManager : Singleton<DataManager>
             //セーブデータをロード
             SaveDataLoad();
         }
-        */
-
-        //セーブデータをロード
-        SaveDataLoad();
     }
 
     //ゲームのデータをロード
@@ -242,7 +236,7 @@ public class DataManager : Singleton<DataManager>
     //セーブデータをロード
     void SaveDataLoad()
     {
-        /*
+        
         //プレイヤーのセーブデータをCSVから読み出し
 #if UNITY_EDITOR
         csvFile = Resources.Load(playerSaveDataPass) as TextAsset;
@@ -250,9 +244,6 @@ public class DataManager : Singleton<DataManager>
 #else
         reader = new StringReader(File.ReadAllText(saveDataDirectoryPass + playerSaveDataPass));
 #endif
-        */
-        csvFile = Resources.Load(playerSaveDataPass) as TextAsset;
-        reader = new StringReader(csvFile.text);
 
         while (reader.Peek() != -1)
         {
@@ -273,7 +264,6 @@ public class DataManager : Singleton<DataManager>
         //リストのデータをクリア
         csvDatas.Clear();
 
-        /*
         //キャラのセーブデータをCSVから読み出し
 #if UNITY_EDITOR
         csvFile = Resources.Load(charaSaveDataPass) as TextAsset;
@@ -281,9 +271,6 @@ public class DataManager : Singleton<DataManager>
 #else
         reader = new StringReader(File.ReadAllText(saveDataDirectoryPass + charaSaveDataPass));
 #endif
-        */
-        csvFile = Resources.Load(charaSaveDataPass) as TextAsset;
-        reader = new StringReader(csvFile.text);
 
         while (reader.Peek() != -1)
         {
