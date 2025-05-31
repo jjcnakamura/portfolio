@@ -247,16 +247,6 @@ public class SkillManager : Singleton<SkillManager>
             }
         }
     }
-    //バフ、デバフスキル
-    void Buff_DebuffSkill(int skillIndex, bool playerOrEnemy, int userIndex, int targetIndex, bool targetAll)
-    {
-
-    }
-    //状態異常スキル
-    void AbnormalitySkill(int skillIndex, bool playerOrEnemy, int userIndex, int targetIndex, bool targetAll)
-    {
-
-    }
 
     //戦闘に出ているキャラのスキルを読み込む
     public void SkillDataRoad()
@@ -318,19 +308,9 @@ public class SkillManager : Singleton<SkillManager>
             enemySkill[i, 1].effectiveTurn = DataManager.Instance.skillData[skillId2].effectiveTurn;
         }
     }
-
-    //毒、ステータス変動などのターンを数える
-    public void AbnormalityTurnCount()
-    {
-        for (int i = 0; i < BattleManager.Instance.playerCharaStatus.Length; i++)
-        {
-
-        }
-    }
 }
 
 //戦闘中のスキルのデータ
-//skillTypeは攻撃、回復などの効果の分類。０が攻撃、１が回復、２がステータス上昇、３がステータス低下、４が状態異常
 [System.Serializable]
 public class Skill
 {
@@ -339,7 +319,7 @@ public class Skill
     public int effectIndex;
     public int seIndex;
 
-    public int skillType;
+    public int skillType; //攻撃、回復などの効果の分類。０が攻撃、１がHP回復、２がHP吸収
     public float value;
     public bool targetAll;
     public int effectiveTurn;
